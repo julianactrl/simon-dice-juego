@@ -1,7 +1,7 @@
 
 body {
   margin: 0;
-  background: #dedede;
+  background: #f6f6f6;
   display: flex;
   align-items: center;
   height: 100vh;
@@ -40,7 +40,7 @@ body {
 }
 
 .violeta {
-  background: #be2edd;
+  background: #6639a6;
 }
 
 .violeta.light {
@@ -56,7 +56,7 @@ body {
 }
 
 .verde {
-  background: #6ab04c;
+  background: green;
 }
 
 .verde.light {
@@ -66,12 +66,14 @@ body {
 .btn-start {
   width: 400px;
   height: 100px;
-  background: #ecf0f1;
-  color: #2c3e50;
+  background: #f6efa6;
+  color: #251f44;
+  border-color: #6ebfb5;
   font-size: 2.5rem;
   position: absolute;
   top: calc(50% - 50px);
   left: calc(50% - 200px);
+  border-radius: 50%;
 }
 
 .hide {

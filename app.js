@@ -7,17 +7,17 @@ const ULTIMO_NIVEL = 10
 
 class Juego {
   constructor() {
-      
-          this.inicializar = this.inicializar.bind(this)
-          this.inicializar()
-          this.generarSecuencia()
-          setTimeout(() => this.siguienteNivel(), 500)
+        
+            this.inicializar = this.inicializar.bind(this)
+            this.inicializar()
+            this.generarSecuencia()
+            setTimeout(this.siguienteNivel, 500)
     }    
           
      inicializar() {
                this.siguienteNivel = this.siguienteNivel.bind(this)
-               this.elegirColor = this.elegirColor.bind(this)          
-               btnEmpezar.classList.add('hide')
+               this.elegirColor = this.elegirColor.bind(this)  
+               this.toggleBtnEmpezar() //es como un interruptor de encendido y apagado    
                this.nivel = 1
                this.colores = {
                celeste,
@@ -27,8 +27,17 @@ class Juego {
              }
              
         }
+
+        toggleBtnEmpezar(){
+           if (btnEmpezar.classList.contains('hide')) {
+            btnEmpezar.classList.remove('hide')
+           } else {
+            btnEmpezar.classList.add('hide')
+           }
+        } 
+
      generarSecuencia() {
-         this.secuencia = new Array(10)
+         this.secuencia = new Array(ULTIMO_NIVEL)
          .fill(0)
          .map(n => Math.floor(Math.random() * 4))
      }
@@ -101,15 +110,14 @@ class Juego {
             if (numeroColor === this.secuencia[this.subnivel]) {
               this.subnivel++
               if (this.subnivel === this.nivel) {
-              this.nivel++
-             this.eliminarEventosClick()
-             if (this.nivel === (ULTIMO_NIVEL + 1)) {
-                this.ganoEljuego()
-            } else {
-                setTimeout(this.siguienteNivel, 1500)
-            }
-    
-            }
+                  this.nivel++
+                  this.eliminarEventosClick()
+                    if (this.nivel === (ULTIMO_NIVEL + 1)) {
+                        this.ganoEljuego()
+                    } else {
+                        setTimeout(this.siguienteNivel, 1500)
+                    } 
+                }
             } else {
                 this.perdioEljuego()
             }
@@ -117,15 +125,12 @@ class Juego {
     
         ganoEljuego() {
             swal('Platzi', 'Felicitaciones, ganaste el juego!', 'success')
+            .then(this.inicializar)
     
         }
         perdioEljuego() {
-            swal({
-                title: 'Simon Dice:',
-                text: 'Lo Siento! Perdiste!',
-                icon: 'error',
-                button: 'volver a intentar',
-            }).then(() => {
+            swal( 'Platzi', 'Lo lamentamos, perdiste :(', 'error')
+            .then(() => {
                 this.eliminarEventosClick()
                 this.inicializar()
             })
