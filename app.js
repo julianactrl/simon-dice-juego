@@ -39,19 +39,6 @@ class Juego {
          this.agregarEventosClick()
      }
 
-     transformarColorANumero(color) {
-        switch (color) {
-        case 'celeste':
-         return 0
-        case 'violeta':
-         return 1
-        case 'naranja':
-         return 2
-        case 'verde':
-          return 3
-        }
-     }
-
      transformarNumeroAColor(numero){
          switch(numero) {
              case 0:
@@ -63,6 +50,19 @@ class Juego {
             case 3: 
                 return 'verde'
          }
+     }
+
+     transformarColorANumero(color) {
+        switch (color) {
+        case 'celeste':
+         return 0
+        case 'violeta':
+         return 1
+        case 'naranja':
+         return 2
+        case 'verde':
+          return 3
+        }
      }
 
      iluminarSecuencia() {
@@ -87,7 +87,7 @@ class Juego {
         this.colores.naranja.addEventListener('click', this.elegirColor)
      }
 
-     eliminarEvenosClick() {
+     eliminarEventosClick() {
         this.colores.celeste.removeEventListener('click', this.elegirColor)
         this.colores.verde.removeEventListener('click', this.elegirColor)
         this.colores.violeta.removeEventListener('click', this.elegirColor)
@@ -96,7 +96,7 @@ class Juego {
     
       elegirColor(ev){
             const nombreColor = ev.target.dataset.color
-            const numeroColor = this.transformarNumeroAColor(nombreColor)
+            const numeroColor = this.transformarColorANumero(nombreColor)
             this.iluminarColor(nombreColor)
             if (numeroColor === this.secuencia[this.subnivel]) {
               this.subnivel++
@@ -126,7 +126,7 @@ class Juego {
                 icon: 'error',
                 button: 'volver a intentar',
             }).then(() => {
-                this.eliminarEvenosClick()
+                this.eliminarEventosClick()
                 this.inicializar()
             })
         }    
